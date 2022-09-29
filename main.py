@@ -226,9 +226,7 @@ class SimpleLoanCalculator(MDApp):
         period_int=int(self.root.ids.aflossing.text)
         schedule=amortization_schedule(p_float,apr_float,period_int)
         voldaan = f'{self.root.ids.voldaan.text}' 
-        
-
-            
+         
         
         screen=Screen()
         #layout=MDDataTable()
