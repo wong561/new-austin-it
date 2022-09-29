@@ -1,0 +1,330 @@
+
+
+<ContentNavigationDrawer>
+
+    
+            
+
+MDScreen:
+
+    MDTopAppBar:
+        id: toolbar
+        pos_hint: {"top": 1}
+        elevation: 10
+        title: "Simple Loan Calculator"
+        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+        
+    MDNavigationLayout:
+        x: root.height
+        size_hint_y: 1.0 - toolbar.height/root.height
+
+
+        ScreenManager:
+            id: screen_manager
+            
+            MDScreen:
+                name: "scr 1"
+                ScrollView:                
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        adaptive_height: True
+                        padding: 40
+                        spacing: 60
+
+                        Widget:
+                            size_hint_y: None
+                            height: 10
+
+                        MDLabel:
+                            id: instructie
+                            text: "Vul onderstaande gegevens in om de lening te calculeren."
+                            halign: "center"
+                            font_size: 50 
+                            theme_text_color: "Custom"
+                            
+                            
+                        Widget:
+                            size_hint_y: None
+                            height: 10                   
+                                                
+
+                        MDTextField:
+                            id: totaal
+                            hint_text: "Totaal bedrag(USD)"
+                            icon_right: "currency-usd"
+                            size_hint_x: None
+                            width: 650                            
+                            font_size: 50
+                            pos_hint: {"center_x": 0.5}
+                            required: True
+                            multiline: False
+                            input_filter: "float"
+                            helper_text_mode: "on_error"
+                            helper_text: "Vul aub het totaal bedrag van de lening in!"
+                            input_type: 'number'
+                            
+                                                
+                            
+                            
+                        MDTextField:
+                            id: aanbetaling
+                            hint_text: "Aanbetaling percentage"
+                            icon_right: "percent-outline"
+                            size_hint_x: None
+                            width: 650
+                            font_size: 50
+                            pos_hint: {"center_x": 0.5}
+                            multiline: False
+                            input_filter: "float"
+                            input_type: 'number'
+                            required: True
+                            helper_text_mode: "on_error"
+                            helper_text: "Vul aub het aanbetaling percentage voor de lening in!"
+
+                        MDTextField:
+                            id: interest
+                            hint_text: "Rente"
+                            icon_right: "percent-outline"
+                            size_hint_x: None
+                            width: 650
+                            font_size: 50
+                            pos_hint: {"center_x": 0.5}
+                            multiline: False
+                            input_filter: "float"
+                            input_type: 'number'
+                            required: True
+                            helper_text_mode: "on_error"
+                            helper_text: "Vul aub de rente voor de lening in!"
+
+                        MDTextField:
+                            id: aflossing
+                            hint_text: "Aflossing(in maanden)"
+                            icon_right: "calendar-month"
+                            size_hint_x: None
+                            width: 650
+                            font_size: 50
+                            pos_hint: {"center_x": 0.5}
+                            multiline: False
+                            input_filter: "int"
+                            input_type: 'number'
+                            required: True
+                            helper_text_mode: "on_error"
+                            helper_text: "Vul aub het gewenst aantal maanden voor de aflossing in!"
+
+                        MDTextField:
+                            id: voldaan
+                            hint_text: "Maanden reeds afgelost"
+                            icon_right: "calendar-month"
+                            size_hint_x: None
+                            width: 650
+                            font_size: 50
+                            pos_hint: {"center_x": 0.5}
+                            multiline: False
+                            input_filter: "int"
+                            input_type: 'number'
+                            min_value: 1
+                            required: True
+                            helper_text_mode: "on_error"
+                            helper_text: "Vul aub in hoeveel maanden reeds zijn afgelost!"
+
+                        MDRoundFlatButton:
+                            id: knop
+                            text: "Calculeer lening"
+                            font_size: 50
+                            pos_hint: {"center_x": 0.5}
+                            on_press:
+                                #app.calculateResults() if totaal.text=='' and aanbetaling.text=='' and interest.text=='' and aflossing.text=='' and voldaan.text=='' and aflossing.text=='0' else None #DELETE!!this line of code for running tests only. 
+
+                                app.calculateResults() if totaal.text!='' and aanbetaling.text!='' and interest.text!='' and aflossing.text!='' and voldaan.text!='' and aflossing.text!='0' else None
+
+                        MDRoundFlatButton:
+                            id: knop3
+                            text: "Toon schema"
+                            font_size: 50
+                            pos_hint: {"center_x": 0.5}
+                            on_press:
+                                app.showSchedule() 
+                            
+                        MDRoundFlatButton:
+                            id: knop2
+                            text: "Reset"
+                            font_size: 50
+                            pos_hint: {"center_x": 0.5}
+                            on_press:
+                                app.showSchedule()
+                                
+                                                                                        
+                                                
+                            
+                                                       
+
+            MDScreen:
+                name: "scr 2"
+                ScrollView:
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        adaptive_height: True
+                        padding: 100
+                        spacing: 35                                                                               
+
+                        MDLabel:
+                            id: about
+                            text: "About SimpleLoanCalCulator"
+                            font_size: 30
+                            halign: 'left'
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            padding_y: 2
+
+                        MDLabel:
+                            id: about1
+                            text: "Developer: Austin Enterprises N.V."
+                            font_size: 30
+                            halign: 'left'
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            padding_y: 2
+
+                        MDLabel:
+                            id: about2
+                            text: "© Copyright 2022"
+                            font_size: 30
+                            halign: 'left'
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            padding_y: 2
+
+                        MDLabel:
+                            id: about4
+                            text: "Versie: 1.0"
+                            font_size: 30
+                            halign: 'left'
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            padding_y: 2
+
+                        MDLabel:
+                            id: about3
+                            text: "Dit is een simpele applicatie om snel kleine leningen te calculeren."
+                            font_size: 30
+                            halign: 'left'
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            padding_y: 2 
+
+                        MDCard:
+                            size_hint: None, None
+                            size: 300, 400
+                            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                            elevation: 10
+                            padding: 25
+                            spacing: 25
+                            orientation: 'vertical'
+                            Image:
+                                source: 'logo.png'
+
+            MDScreen:                       
+                name: "scr 3"
+                ScrollView: 
+                                                
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        adaptive_height: True
+                        padding: 40
+                        spacing: 75                         
+
+                        MDLabel:
+                            id: resultaat
+                            text: "Resultaat van de calcutatie: "                        
+                            font_size: 50        
+
+                        TwoLineListItem:
+                            id: totale_leensom
+                            text: "Totaal bedrag: "                        
+                            secondary_text: "Secondary text here"
+
+                        TwoLineListItem:
+                            id: aanbetaling_in_usd
+                            text: "Aanbetaling in USD: " 
+                            secondary_text: "Secondary text here" 
+
+                        TwoLineListItem:
+                            id: leen_bedrag
+                            text: "Leen bedrag: "                        
+                            secondary_text: "Secondary text here"     
+
+                        TwoLineListItem:
+                            id: aflossing_per_maand
+                            text: "Aflossing per maand: " 
+                            secondary_text: "Secondary text here"
+
+                        TwoLineListItem:
+                            id: res_aanbetaling
+                            text: "Aanbetaling: " 
+                            secondary_text: "Secondary text here"                       
+                            
+
+                        TwoLineListItem:
+                            id: interest_percentage
+                            text: "Rente percentage: "  
+                            secondary_text: "Secondary text here"                      
+                            
+                        TwoLineListItem:
+                            id: aantal_maanden
+                            text: "Aantal maanden voor aflossing: " 
+                            secondary_text: "Secondary text here"                       
+                            
+                        TwoLineListItem:
+                            id: reeds_afgelost
+                            text: "Maanden reeds afgelost: "  
+                            secondary_text: "Secondary text here"  
+
+                        MDRoundFlatButton:
+                            id: back_button_1
+                            text: "Back"
+                            font_size: 50
+                            pos_hint: {"bottom_y": 0.9}
+                            on_release:app.backButton()
+            MDScreen:                       
+                name: "scr 4"
+                ScrollView: 
+                                                
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        adaptive_height: True
+                        padding: 40
+                        spacing: 75                         
+
+                        MDLabel:
+                            id: labeltext
+                            text: "VICTORY!!!!!11"                      
+                            font_size: 50   
+                        MDRoundFlatButton:
+                            id: back_button_1
+                            text: "Back"
+                            font_size: 50
+                            pos_hint: {"bottom_y": 0.9}
+                            on_release:app.backButton()
+                            on_press:app.clearInput()
+
+                        MDLabel:
+                            id:chart
+                            text:"Schedule here!!!" 
+
+  
+                      
+        MDNavigationDrawer:
+            id: nav_drawer
+
+                       
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
+                
+                
+
+          
+
+
